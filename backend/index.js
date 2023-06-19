@@ -74,6 +74,17 @@ app.put("/books/:id", (req,res) => {
   })
 })
 
+app.get("/books/:id", (req,res) => {
+  const bookId = req.params.id;
+  const query = 'select * from books where id = ?';
+
+  connection.query(query, [bookId], (err, data) => {
+    if(err) return res.json(err);
+    return res.json(data);
+  } )
+
+})
+
 app.listen(3000, () => {
     console.log('connected to backend11')
 })
